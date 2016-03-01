@@ -1,0 +1,10 @@
+{
+  "name": "Registro",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "express": "^4.13.3",
+    "serialport": "^1.7.4",
+    "socket.io": "^1.3.6"
+  }
+}
