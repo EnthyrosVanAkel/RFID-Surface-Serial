@@ -26,8 +26,16 @@ io.sockets.on('connection', function (socket)
 	  } else {
 	    console.log('ABIERTO');
 	    serialPort.on('data', function(data) {
-	      console.log('datos recibidos: ' + data);
-	      socket.emit("rfid", {rfid : data});
+	    	//console.log('data: '+data);
+	    	limpio = data.replace(/[^a-zA-Z 0-9.]+/g,' ');	
+	    	//console.log('limpio: '+limpio);
+	    	cortado = limpio.substring(5,11);
+	    	//console.log('cortado: '+cortado);
+	    	decimal = parseInt(cortado,16);
+	    	//console.log('decimal: '+decimal)
+	    	console.log('rfid: '+decimal);
+	      //console.log('datos recibidos: ' + data);
+	      socket.emit("rfid", {rfid : decimal});
 	    });
 	    serialPort.write("ls\n", function(err, results) {
 	      console.log('error :' + err);
