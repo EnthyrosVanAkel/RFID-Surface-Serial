@@ -21,17 +21,17 @@ io.sockets.on('connection', function (socket)
 	serialPort.open(function (error) {
 	  if ( error ) {
 
-	    console.log('failed to open: '+error);
+	    console.log('Fallo al abrir: '+error);
 	    socket.emit("refresh", { refresh: true});
 	  } else {
-	    console.log('open');
+	    console.log('ABIERTO');
 	    serialPort.on('data', function(data) {
-	      console.log('data received: ' + data);
+	      console.log('datos recibidos: ' + data);
 	      socket.emit("rfid", {rfid : data});
 	    });
 	    serialPort.write("ls\n", function(err, results) {
-	      console.log('err ' + err);
-	      console.log('results ' + results);
+	      console.log('error :' + err);
+	      console.log('resultados :' + results);
 	    });
 	  }
 	}); 
