@@ -1,6 +1,6 @@
 //Envía datos RFID a la aplicación Webkit a través de Socket.io
 
-var io = require('socket.io').listen(1235);
+var io = require('socket.io').listen(6321);
 var sp = require("serialport");
 var SerialPort = require("serialport").SerialPort;
 
