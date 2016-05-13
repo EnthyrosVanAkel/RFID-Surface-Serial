@@ -30,7 +30,7 @@ pcsc.on('reader', function(reader) {
                         console.log(err);
                     } else {
                         console.log('Protocol(', reader.name, '):', protocol);
-                        reader.transmit(new Buffer([0xff, 0xCA, 0x00, 0x00, 0x00]), 6, protocol, function(err, data) {
+                        reader.transmit(new Buffer([0xff, 0xCA, 0x00, 0x00, 0x00]), 10, protocol, function(err, data) {
                             if (err) {
                                 console.log(err);
                             } else {

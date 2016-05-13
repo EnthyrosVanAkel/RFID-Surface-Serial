@@ -1,8 +1,26 @@
 //Envía datos RFID a la aplicación Webkit a través de Socket.io
 
-var io = require('socket.io').listen(1235);
+var io = require('socket.io').listen(1235   );
 var pcsc = require('pcsclite');
 var pcsc = pcsc();
+
+var osc = require('node-osc')
+
+var oscClient;
+var url = '10.1.7.146';
+var puerto = 1234;
+oscClient = new osc.Client(url,puerto);
+
+
+io.on('connection', function (socket) {
+    socket.on("mensaje", function (mensaje) {
+        console.log('mensaje',mensaje);
+        oscClient.send('/checkin',mensaje);
+        
+    });
+});
+
+
 
 var COMANDO = new Buffer([0xff, 0xCA, 0x00, 0x00, 0x00]);
 var LONG_RESPONSE = 10;
@@ -13,6 +31,11 @@ function reverse(s){
 
 	console.log('ABIERTO');
 	pcsc.on('reader', function(reader) {
+
+
+
+
+
 
     console.log('Lector Detectado = > ', reader.name);
 
@@ -58,13 +81,19 @@ function reverse(s){
                                 decimal = parseInt(invertir,16);     
                                 //console.log(cadena);
                                 //console.log(invertir);
+                               
+
                                 console.log(decimal);
                                 io.emit("rfid", {rfid : decimal});
+
+
                                 //console.log('Datos Recibidos', data.toJSON());
                                 //reader.close();
                                 //pcsc.close();
                             }
                         });
+
+
                     }
                 });
             }
@@ -79,6 +108,7 @@ function reverse(s){
 	pcsc.on('error', function(err) {
 	    console.log('PCSC error', err.message);
 	});
+
 
 
 

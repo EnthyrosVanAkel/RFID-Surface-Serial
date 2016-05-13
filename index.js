@@ -1,6 +1,6 @@
 //Envía datos RFID a la aplicación Webkit a través de Socket.io
 
-var io = require('socket.io').listen(6321);
+var io = require('socket.io').listen(1236);
 var sp = require("serialport");
 var SerialPort = require("serialport").SerialPort;
 
@@ -13,6 +13,7 @@ var serialPort = new SerialPort("COM3", {
 
 io.sockets.on('connection', function (socket)
 {	
+	
 	if(serialPort.isOpen())
 	{
 		serialPort.close();
@@ -37,12 +38,20 @@ io.sockets.on('connection', function (socket)
 	      //console.log('datos recibidos: ' + data);
 	      socket.emit("rfid", {rfid : decimal});
 	    });
+	    
 	    serialPort.write("ls\n", function(err, results) {
 	      console.log('error :' + err);
 	      console.log('resultados :' + results);
 	    });
 	  }
 	}); 
-
+io.on("mensaje", function (mensaje) {
+    console.log('mensaje',mensaje);
+    oscClient.send('/checkin',mensaje);
+  });
     
 });
+
+
+
+  
