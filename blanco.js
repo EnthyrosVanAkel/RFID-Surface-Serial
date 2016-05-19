@@ -69,21 +69,21 @@ function reverse(s){
                                 console.log(err);
                             } else {
                                 var cadena = "";
-                                //console.log('Datos Recibidos', data);
+                                console.log('Datos Recibidos', data);
                                 tamano = data.length;
-                                //console.log(tamano);
+                                console.log(tamano);
                                 for(i = 0 ;i<tamano-2;i++){
                                     v = data[i];
-                                    //console.log(v);
+                                    console.log(v);
                                     cadena = cadena.concat(v);
                                 }
                                 invertir = reverse(cadena);
                                 decimal = parseInt(invertir,16);     
-                                //console.log(cadena);
-                                //console.log(invertir);
+                                console.log('cadena',cadena);
+                                console.log('invertida',invertir);
                                
 
-                                console.log(decimal);
+                                console.log('decimal',decimal);
                                 io.emit("rfid", {rfid : decimal});
 
 
