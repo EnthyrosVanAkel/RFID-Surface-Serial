@@ -1,6 +1,6 @@
 //Envía datos RFID a la aplicación Webkit a través de Socket.io
 
-var io = require('socket.io').listen(1235   );
+var io = require('socket.io').listen(1236);
 var pcsc = require('pcsclite');
 var pcsc = pcsc();
 
